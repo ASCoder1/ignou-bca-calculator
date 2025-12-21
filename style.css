@@ -695,6 +695,10 @@
      .hero-text h1 {
          font-size: 1.8rem;
      }
+      
+     .navbar-brand {
+         font-size: 1rem;
+     }
 
      .hero-text p {
          font-size: 1rem;
@@ -885,4 +889,5 @@
 
  .note:hover {
      background: #e0f0ff;
+
  }
