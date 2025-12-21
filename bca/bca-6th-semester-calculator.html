@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGNOU BCA 6th Semester Marks Calculator 2025 | Result, Grade & Pass/Fail</title>
+    <meta name="description"
+        content="Free IGNOU BCA 6th Semester Marks & Result Calculator 2025. Calculate theory, assignment & practical marks, grade and pass/fail status instantly based on IGNOU marking scheme.">
+    <meta name="keywords"
+        content="IGNOU BCA 6th semester marks calculator, IGNOU BCA 6th semester result calculator, IGNOU pass marks, IGNOU BCA grade system, IGNOU assignment marks">
+    <!-- Open Graph -->
+    <meta property="og:title" content="IGNOU BCA 6th Semester Marks & Result Calculator">
+    <meta property="og:description"
+        content="Check IGNOU BCA 6th semester result, grade & pass/fail instantly using official IGNOU marking rules.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://example.com/ignou-calculator-preview.png">
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- style.css -->
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+
+
+
+<body>
+     <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="bca-calculator.html">🧮 IGNOU BCA Calculator</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="bca-calculator.html">Calculator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../disclaimer.html">Disclaimer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                      <h1>IGNOU BCA 6th Semester Marks & Result Calculator</h1>
+                    <p>
+                        Check your IGNOU BCA 6th semester subject result, grade & pass/fail status
+                        instantly using official IGNOU marking rules.
+                    </p>
+                    <ul>
+                        <li>No login required</li>
+                        <li>Free & instant result</li>
+                        <li>Accurate IGNOU marking logic</li>
+                    </ul>
+                </div>
+                <div class="calculator">
+                    <h2>Enter Your Marks</h2>
+                    <form id="calculator-form">
+                        <div class="input-group">
+                            <label for="theory">Theory Marks (0–100)</label>
+                            <input type="number" id="theory" min="0" max="100" required aria-describedby="theory-help">
+                            <small id="theory-help" class="sr-only">Enter your theory exam marks out of 100.</small>
+                            <div id="theory-error" class="error"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="assignment">Assignment Marks (0–100)</label>
+                            <input type="number" id="assignment" min="0" max="100" required
+                                aria-describedby="assignment-help">
+                            <small id="assignment-help" class="sr-only">Enter your assignment marks out of 100.</small>
+                            <div id="assignment-error" class="error"></div>
+                        </div>
+                        <div class="checkbox-group">
+                            <label for="practical-check">
+                                <input type="checkbox" id="practical-check" aria-describedby="practical-help">
+                                <h5>Include Practical Marks</h5>
+                            </label>
+                            <small id="practical-help" class="sr-only">Check this if your subject includes practical
+                                marks.</small>
+                        </div>
+                        <div class="input-group" id="practical-group" style="display:none;">
+                            <label for="practical">Practical Marks (0–100)</label>
+                            <input type="number" id="practical" min="0" max="100"
+                                aria-describedby="practical-input-help">
+                            <small id="practical-input-help" class="sr-only">Enter your practical marks out of
+                                100.</small>
+                            <div id="practical-error" class="error"></div>
+                        </div>
+                        <button type="button" class="btn" id="calculate-btn"
+                            aria-label="Calculate your IGNOU BCA result">Calculate Result</button>
+                        <button type="button" class="btn btn-secondary" id="reset-btn"
+                            aria-label="Reset the calculator">Reset</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULT -->
+        <section class="result mb-3" id="result-section">
+            <h2>Your Result</h2>
+            <p id="status"></p>
+            <p id="marks"></p>
+            <p id="grade"></p>
+            <p id="reason"></p>
+            <small>* Estimated result based on IGNOU rules. Consult official sources for final confirmation.</small>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="section">
+            <h2>How IGNOU BCA Marks Are Calculated?</h2>
+            <p><strong>Theory:</strong> 70% weightage</p>
+            <p><strong>Assignment:</strong> 30% weightage</p>
+            <p><strong>Minimum Passing Marks:</strong> 40% in each component (Theory, Assignment, Practical if
+                applicable)</p>
+            <p>Overall grade is based on total percentage: A (80%+), B (60-79%), C (50-59%), D (40-49%)</p>
+        </section>
+
+        <!-- SEMESTERS -->
+        <section class="section p-3">
+            <h2>Semester-wise IGNOU BCA Calculators</h2>
+            <div class="cards">
+                <div class="card">
+                    <a href="bca-1st-semester-calculator.html" aria-label="IGNOU BCA 1st Semester Marks Calculator">
+                        BCA 1st Semester
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="bca-2nd-semester-calculator.html" aria-label="IGNOU BCA 2nd Semester Marks Calculator">
+                        BCA 2nd Semester
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="bca-3rd-semester-calculator.html" aria-label="IGNOU BCA 3rd Semester Marks Calculator">
+                        BCA 3rd Semester
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="bca-4th-semester-calculator.html" aria-label="IGNOU BCA 4th Semester Marks Calculator">
+                        BCA 4th Semester
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="bca-5th-semester-calculator.html" aria-label="IGNOU BCA 5th Semester Marks Calculator">
+                        BCA 5th Semester
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a href="bca-6th-semester-calculator.html" aria-label="IGNOU BCA 6th Semester Marks Calculator">
+                        BCA 6th Semester
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- FAQ -->
+        <section class="section p-3">
+            <h2>IGNOU BCA FAQ</h2>
+            <div class="faq">
+                <h3>IGNOU BCA pass marks kitne hote hain?</h3>
+                <p>IGNOU BCA me minimum 40% theory, assignment aur practical me pass hona zaroori hai. Overall
+                    percentage bhi 40% se kam nahi hona chahiye.</p>
+            </div>
+            <div class="faq">
+                <h3>Assignment fail ho jaye to kya hota hai?</h3>
+                <p>Assignment me 40 se kam hone par subject fail hota hai, aur aapko re-submit karna padega.</p>
+            </div>
+            <div class="faq">
+                <h3>Practical me fail hone par result kya hoga?</h3>
+                <p>Practical mandatory subject me fail hone par overall subject fail hota hai. Aapko practical dobara
+                    dena hoga.</p>
+            </div>
+            <div class="faq">
+                <h3>Ye calculator accurate hai?</h3>
+                <p>Ye calculator IGNOU ke official marking scheme ke base par bana hai, lekin ye sirf estimate hai.
+                    Final result IGNOU ke evaluation par depend karta hai.</p>
+            </div>
+        </section>
+
+        <footer>
+            <a href="../about.html">About</a>
+            <a href="../disclaimer.html">Disclaimer</a>
+            <a href="../privacy-policy.html">Privacy Policy</a>
+            <a href="../contact.html">Contact</a>
+            <p>© 2025 IGNOU BCA Marks Calculator • Built for students</p>
+        </footer>
+
+
+    </div>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

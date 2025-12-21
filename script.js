@@ -1,0 +1,80 @@
+const practicalCheck = document.getElementById('practical-check');
+const practicalGroup = document.getElementById('practical-group');
+const practicalInput = document.getElementById('practical');
+
+practicalCheck.addEventListener('change', () => {
+    practicalGroup.style.display = practicalCheck.checked ? 'block' : 'none';
+    if (!practicalCheck.checked) practicalInput.value = '';
+});
+
+document.getElementById('calculate-btn').addEventListener('click', (e) => {
+    e.preventDefault(); // <-- add this to stop form submission
+
+    const theory = Number(document.getElementById('theory').value);
+    const assignment = Number(document.getElementById('assignment').value);
+    const practical = Number(practicalInput.value);
+
+    if ([theory, assignment].some(v => v < 0 || v > 100)) {
+        alert("Marks must be between 0 and 100");
+        return;
+    }
+
+    if (practicalCheck.checked && (practical < 0 || practical > 100)) {
+        alert("Practical marks must be between 0 and 100");
+        return;
+    }
+
+    const total = (theory * 0.7) + (assignment * 0.3);
+
+    let status = "PASS ✅";
+    let reason = "";
+    let grade = "";
+
+    if (theory < 40) {
+        status = "FAIL ❌";
+        reason = "Theory marks below 40";
+    } else if (assignment < 40) {
+        status = "FAIL ❌";
+        reason = "Assignment marks below 40";
+    } else if (practicalCheck.checked && practical < 40) {
+        status = "FAIL ❌";
+        reason = "Practical marks below 40";
+    } else if (total < 40) {
+        status = "FAIL ❌";
+        reason = "Overall percentage below 40";
+    } else {
+        if (total >= 80) grade = "A";
+        else if (total >= 60) grade = "B";
+        else if (total >= 50) grade = "C";
+        else grade = "D";
+    }
+
+    document.getElementById('status').textContent = "Status: " + status;
+    document.getElementById('marks').textContent = "Final Marks: " + total.toFixed(0);
+    document.getElementById('grade').textContent = grade ? "Grade: " + grade : "";
+    document.getElementById('reason').textContent = reason ? "Reason: " + reason : "";
+
+    document.getElementById('result-section').style.display = "block";
+    document.getElementById('result-section').scrollIntoView({ behavior: "smooth" });
+});
+document.getElementById('reset-btn').addEventListener('click', () => {
+    // Clear all input fields
+    document.getElementById('theory').value = '';
+    document.getElementById('assignment').value = '';
+    document.getElementById('practical').value = '';
+    
+    // Hide practical input if checkbox was checked
+    practicalCheck.checked = false;
+    practicalGroup.style.display = 'none';
+
+    // Hide result section
+    document.getElementById('result-section').style.display = 'none';
+});
+
+
+document.querySelectorAll('.faq h3').forEach(h => {
+    h.onclick = () => {
+        const p = h.nextElementSibling;
+        p.style.display = p.style.display === "block" ? "none" : "block";
+    };
+});
