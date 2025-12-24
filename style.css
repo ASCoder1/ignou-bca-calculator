@@ -341,11 +341,19 @@
  }
 
  .result.pass {
-     border-left: 6px solid #28a745;
+       border-left: 6px solid #16a34a;
+    background: #f0fdf4;
  }
+#result-section {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 10px;
+}
 
  .result.fail {
-     border-left: 6px solid #dc3545;
+      border-left: 6px solid #dc2626;
+    background: #fef2f2;
  }
 
  .result h2 {
@@ -891,3 +899,4 @@
      background: #e0f0ff;
 
  }
+
