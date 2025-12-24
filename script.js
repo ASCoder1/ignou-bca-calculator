@@ -1,84 +1,105 @@
-document.getElementById('calculate-btn').addEventListener('click', (e) => {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
 
-    const theory = Number(document.getElementById('theory').value);
-    const assignment = Number(document.getElementById('assignment').value);
-    const practical = Number(practicalInput.value || 0);
+    const practicalCheck = document.getElementById('practical-check');
+    const practicalGroup = document.getElementById('practical-group');
+    const practicalInput = document.getElementById('practical');
 
-    if ([theory, assignment].some(v => v < 0 || v > 100)) {
-        alert("Marks must be between 0 and 100");
-        return;
-    }
+    // Show / hide practical input
+    practicalCheck.addEventListener('change', () => {
+        practicalGroup.style.display = practicalCheck.checked ? 'block' : 'none';
+        if (!practicalCheck.checked) practicalInput.value = '';
+    });
 
-    if (practicalCheck.checked && (practical < 0 || practical > 100)) {
-        alert("Practical marks must be between 0 and 100");
-        return;
-    }
+    document.getElementById('calculate-btn').addEventListener('click', (e) => {
+        e.preventDefault();
 
-    const total = (theory * 0.7) + (assignment * 0.3);
+        const theory = Number(document.getElementById('theory').value);
+        const assignment = Number(document.getElementById('assignment').value);
+        const practical = Number(practicalInput.value || 0);
 
-    let status = "PASS ✅";
-    let reason = [];
-    let grade = "";
-    let probability = 0;
-    let risk = "Low";
-
-    // FAIL CONDITIONS
-    if (theory < 35) {
-        status = "FAIL ❌";
-        reason.push("Theory marks very low");
-        probability = 10;
-        risk = "High";
-    } 
-    else if (assignment < 35) {
-        status = "FAIL ❌";
-        reason.push("Assignment marks very low");
-        probability = 15;
-        risk = "High";
-    } 
-    else if (practicalCheck.checked && practical < 35) {
-        status = "FAIL ❌";
-        reason.push("Practical marks very low");
-        probability = 15;
-        risk = "High";
-    } 
-    else {
-        // GRACE ZONE
-        if (theory >= 35 && theory < 40) {
-            reason.push("Theory in grace marks range");
-        }
-        if (assignment >= 35 && assignment < 40) {
-            reason.push("Assignment in grace marks range");
+        if ([theory, assignment].some(v => v < 0 || v > 100)) {
+            alert("Marks must be between 0 and 100");
+            return;
         }
 
-        // PASS LOGIC
-        if (total >= 40) {
-            probability = Math.min(95, Math.round(total + 20));
-            risk = probability > 80 ? "Low" : "Medium";
+        if (practicalCheck.checked && (practical < 0 || practical > 100)) {
+            alert("Practical marks must be between 0 and 100");
+            return;
+        }
 
-            if (total >= 80) grade = "A";
-            else if (total >= 60) grade = "B";
-            else if (total >= 50) grade = "C";
-            else grade = "D";
-        } else {
+        const total = (theory * 0.7) + (assignment * 0.3);
+
+        let status = "PASS ✅";
+        let reason = [];
+        let grade = "";
+        let probability = 0;
+        let risk = "Low";
+
+        // FAIL CONDITIONS
+        if (theory < 35) {
             status = "FAIL ❌";
-            probability = 30;
-            risk = "Medium";
-            reason.push("Overall percentage below 40");
+            reason.push("Theory marks very low");
+            probability = 10;
+            risk = "High";
         }
-    }
+        else if (assignment < 35) {
+            status = "FAIL ❌";
+            reason.push("Assignment marks very low");
+            probability = 15;
+            risk = "High";
+        }
+        else if (practicalCheck.checked && practical < 35) {
+            status = "FAIL ❌";
+            reason.push("Practical marks very low");
+            probability = 15;
+            risk = "High";
+        }
+        else {
+            // GRACE ZONE
+            if (theory >= 35 && theory < 40) {
+                reason.push("Theory in grace marks range");
+            }
+            if (assignment >= 35 && assignment < 40) {
+                reason.push("Assignment in grace marks range");
+            }
 
-    document.getElementById('status').textContent = `Prediction: ${status}`;
-    document.getElementById('marks').textContent = `Expected Percentage: ${total.toFixed(0)}%`;
-    document.getElementById('grade').textContent = grade ? `Expected Grade: ${grade}` : "";
-    document.getElementById('reason').textContent = reason.length 
-        ? `Analysis: ${reason.join(", ")}` 
-        : "Analysis: Strong performance based on IGNOU rules";
+            if (total >= 40) {
+                probability = Math.min(95, Math.round(total + 20));
+                risk = probability > 80 ? "Low" : "Medium";
 
-    // NEW FIELDS (add spans/divs in HTML)
-    document.getElementById('probability').textContent = `Prediction Confidence: ${probability}%`;
-    document.getElementById('risk').textContent = `Risk Level: ${risk}`;
+                if (total >= 80) grade = "A";
+                else if (total >= 60) grade = "B";
+                else if (total >= 50) grade = "C";
+                else grade = "D";
+            } else {
+                status = "FAIL ❌";
+                probability = 30;
+                risk = "Medium";
+                reason.push("Overall percentage below 40");
+            }
+        }
 
-    document.getElementById('result-section').style.display = "block";
-    document.getElementById('result-section').scrollIntoView({ behavior: "smooth" });
+        document.getElementById('status').textContent = `Prediction: ${status}`;
+        document.getElementById('marks').textContent = `Expected Percentage: ${total.toFixed(0)}%`;
+        document.getElementById('grade').textContent = grade ? `Expected Grade: ${grade}` : "";
+        document.getElementById('reason').textContent = reason.length
+            ? `Analysis: ${reason.join(", ")}`
+            : "Analysis: Strong performance based on IGNOU rules";
+
+        document.getElementById('probability').textContent = `Prediction Confidence: ${probability}%`;
+        document.getElementById('risk').textContent = `Risk Level: ${risk}`;
+
+        document.getElementById('result-section').style.display = "block";
+        document.getElementById('result-section').scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+        document.getElementById('theory').value = '';
+        document.getElementById('assignment').value = '';
+        practicalInput.value = '';
+        practicalCheck.checked = false;
+        practicalGroup.style.display = 'none';
+        document.getElementById('result-section').style.display = 'none';
+    });
+
 });
